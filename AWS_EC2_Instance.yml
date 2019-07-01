@@ -1,0 +1,20 @@
+Description: Single Instance
+Resources:
+  EC2Instance:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      ImageId: ami-0c55b159cbfafe1f0
+      InstanceType: t2.micro
+      KeyName: narendra_aws
+      Tags:
+        - Key: Name
+          Value: test
+      SubnetId: !Select 
+        - '0'
+        - !Ref Subnets
+Parameters:
+  Subnets:
+    Type: 'List<AWS::EC2::Subnet::Id>'
+    Description: >-
+      The list of SubnetIds, for at least two Availability Zones in the region
+      in your Virtual Private Cloud (VPC)
